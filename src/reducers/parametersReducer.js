@@ -3,12 +3,19 @@ import {RECEIVE_PARAMETERS} from '../actions/actionTypes';
 
 export default function parameters(state = initialState.parameters, action) {
   let newState;
+  
   switch (action.type) {
     case RECEIVE_PARAMETERS:
-      let newValue = action.parameters.test * 2;
-      newState = { test: newValue };
-      console.log('RECEIVE_PARAMETERS Action')
+      console.log(JSON.stringify(action));
+      newState =  { 
+         attack: action.parameters.attack || state.attack,
+         decay: action.parameters.decay || state.decay,
+         sustain: action.parameters.sustain || state.sustain,
+         release: action.parameters.release || state.release
+      };
+      
       return newState;
+
     default:
       return state;
   }

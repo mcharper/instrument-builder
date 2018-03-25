@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import ConnectedComponent from './components/ConnectedComponent';
+import InstrumentBuilderPage from './containers/InstrumentBuilderPage';
 
 class App extends Component {
   render() {
@@ -11,10 +11,12 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Instrument Builder</h1>
         </header>
+
         <div className="App-intro">
-          This app allows you to play around with Tone.js parameters to create a sound you like, which you can then use as a patch for Tone.js applications. 
-            <ConnectedComponent />
+            This app allows you to play around with Tone.js parameters to create a sound you like, which you can then use as a patch for Tone.js applications. 
         </div>
+
+        <InstrumentBuilderPage />
       </div>
     );
   }

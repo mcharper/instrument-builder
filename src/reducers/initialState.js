@@ -1,3 +1,9 @@
 export default {
-  parameters: [ { test: 1 } ]
+  parameters: 
+    { 
+         attack: 0.2,
+         decay: 0.4,
+         sustain: 0.6,
+         release: 0.8 
+    }
 };
