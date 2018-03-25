@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import AdsrControl from '../components/AdsrControl.js';
 import AdsrEnvelope from '../components/AdsrEnvelope.js';
+import AdsrPatch from '../components/AdsrPatch.js';
+import AdsrPlayer from '../components/Player.js';
 
 class InstrumentBuilderPage extends React.Component {
     onChange = (parameters) => {
@@ -32,7 +34,24 @@ class InstrumentBuilderPage extends React.Component {
                             <AdsrEnvelope parameters={this.props.parameters} />
                         </div>
                     </div>
-                </div>                
+
+                    <div className="row">
+                        <div className="col-sm-6">
+                        </div>
+                        <div className="col-sm-6">
+                            <AdsrPatch parameters={this.props.parameters} />
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-sm-6">
+                        </div>
+                        <div className="col-sm-6">
+                            <AdsrPlayer parameters={this.props.parameters} />
+                        </div>
+                    </div>
+
+                </div>  
             )
         }
     }
