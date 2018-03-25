@@ -41,7 +41,7 @@ class AdsrControl extends Component {
           <div className="col-xs-3">
             <div className="form-group row">
                   <label htmlFor="sustain" className="col-xs-6  col-form-label verticalSliderLabel">Sustain</label>
-                  <input type="range" className="col-xs-6 slider verticalSlider" name="sustain" id="sustainSlider" min="0" max="5" step="0.01" 
+                  <input type="range" className="col-xs-6 slider verticalSlider" name="sustain" id="sustainSlider" min="0" max="1" step="0.01" 
                     value={this.props.parameters.sustain}
                     onChange={this.onChange}
                   />
