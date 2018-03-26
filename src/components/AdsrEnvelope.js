@@ -9,12 +9,12 @@ class AdsrEnvelope extends Component {
     this.redraw();
   }
 
-  redraw(parameters) {
+  redraw(envelope) {
     this.data = [{x: 0, y: 0}];
-    this.data.push({ x: +this.props.parameters.attack, y: 1 })
-    this.data.push({ x: +this.props.parameters.attack + +this.props.parameters.decay, y: this.props.parameters.sustain })
-    this.data.push({ x: +this.props.parameters.attack + +this.props.parameters.decay + +1, y: this.props.parameters.sustain })
-    this.data.push({ x: +this.props.parameters.attack + +this.props.parameters.decay + +1 + +this.props.parameters.release, y: 0 })
+    this.data.push({ x: +this.props.envelope.attack, y: 1 })
+    this.data.push({ x: +this.props.envelope.attack + +this.props.envelope.decay, y: this.props.envelope.sustain })
+    this.data.push({ x: +this.props.envelope.attack + +this.props.envelope.decay + +1, y: this.props.envelope.sustain })
+    this.data.push({ x: +this.props.envelope.attack + +this.props.envelope.decay + +1 + +this.props.envelope.release, y: 0 })
   };
 
   componentWillUpdate(nextProps, nextState) {
@@ -32,7 +32,7 @@ class AdsrEnvelope extends Component {
   render() {
     const {activePoint} = this.state
     return (
-        <div className="AdsrEnvelope">
+        <div className="AdsrEnvelope panel">
           Adsr Envelope
   
           <LineChart

@@ -1,5 +1,12 @@
 export default {
-  parameters: 
+    oscillator: {
+        type: 'sine',
+        frequency: 440 ,
+        detune: 0 ,
+        phase: 0 ,
+        partials: []
+    },
+    envelope: 
     { 
          attack: 0.2,
          decay: 0.4,

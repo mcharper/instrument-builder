@@ -1,25 +1,17 @@
 import Tone from "tone";
 
-export const play = (envelope) => {
+export const play = (oscillator, envelope) => {
     Tone.context.close();
     Tone.context = new AudioContext();
 
     var synth = new Tone.Synth({
-        "oscillator" : {
-            "type" : "sawtooth",
-            "modulationFrequency" : 0.2
-        },
-        "envelope" : {
-            "attack" : envelope.attack,
-            "decay" : envelope.decay,
-            "sustain" : envelope.sustain,
-            "release" : envelope.release,
-        }
+        "oscillator" : oscillator,
+        "envelope" : envelope
     }).toMaster();
 
     synth.triggerAttackRelease("D3", "4n");
 
-    Tone.Master.volume.value = -32;
+    Tone.Master.volume.value = -10;
     Tone.Transport.start(1);
 };
 

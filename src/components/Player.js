@@ -11,7 +11,7 @@ class Player extends Component {
 
   playButtonClick() {
     // this.status = "Now playing ...";
-    synth.play(this.props.parameters);
+    synth.play(this.props.envelope);
   }
 
   stopButtonClick() {

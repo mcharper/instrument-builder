@@ -9,8 +9,15 @@ class AdsrPatch extends Component {
 
   render() {
     return (
-        <div className="AdsrPatch">
-          <pre>{JSON.stringify(this.props.parameters)}</pre>
+        <div className="AdsrPatch panel">
+            oscillator:
+            {
+                JSON.stringify(this.props.oscillator)
+            },
+            envelope:
+            {
+                JSON.stringify(this.props.envelope)
+            } 
         </div>
     )
   }

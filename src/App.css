@@ -36,3 +36,13 @@
 .verticalSliderLabel {
     writing-mode: bt-lr;
 }
+
+.panel {
+    border: 1px solid silver;
+    margin: 10px;
+    padding: 10px;
+}
+
+.oscillatorWave {
+  width: 100px;
+}

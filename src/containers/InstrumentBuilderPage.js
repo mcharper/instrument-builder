@@ -1,23 +1,33 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as parametersActions from '../actions/parametersActions';
+import * as envelopeActions from '../actions/envelopeActions';
+import * as oscillatorActions from '../actions/oscillatorActions';
 import PropTypes from 'prop-types';
 import React from 'react';
+
+import OscillatorControl from '../components/OscillatorControl.js';
+import OscillatorDisplay from '../components/OscillatorDisplay.js';
+
 import AdsrControl from '../components/AdsrControl.js';
 import AdsrEnvelope from '../components/AdsrEnvelope.js';
+
 import AdsrPatch from '../components/AdsrPatch.js';
 import AdsrPlayer from '../components/Player.js';
 
 class InstrumentBuilderPage extends React.Component {
-    onChange = (parameters) => {
-        this.props.parametersActions.receiveParameters({attack: parameters.attack, decay: parameters.decay, sustain: parameters.sustain, release: parameters.release});
+    tweakOscillator= (oscillator) => {
+        this.props.oscillatorActions.tweakOscillator({type: oscillator.type});
+    }
+
+    tweakEnvelope = (envelope) => {
+        this.props.envelopeActions.tweakEnvelope({attack: envelope.attack, decay: envelope.decay, sustain: envelope.sustain, release: envelope.release});
     }
 
     componentWillMount() {
     }
 
     render() {
-        if(!this.props.parameters){
+        if(!this.props.envelope){
             return (
                 <div>
                     Loading Stuff...
@@ -28,10 +38,19 @@ class InstrumentBuilderPage extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-6">
-                            <AdsrControl parameters={this.props.parameters} onChange={this.onChange} />
+                            <OscillatorControl oscillator={this.props.oscillator} onChange={this.tweakOscillator} />
                         </div>
                         <div className="col-sm-6">
-                            <AdsrEnvelope parameters={this.props.parameters} />
+                            <OscillatorDisplay oscillator={this.props.oscillator} />
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-sm-6">
+                            <AdsrControl envelope={this.props.envelope} onChange={this.tweakEnvelope} />
+                        </div>
+                        <div className="col-sm-6">
+                            <AdsrEnvelope envelope={this.props.envelope} />
                         </div>
                     </div>
 
@@ -39,7 +58,7 @@ class InstrumentBuilderPage extends React.Component {
                         <div className="col-sm-6">
                         </div>
                         <div className="col-sm-6">
-                            <AdsrPatch parameters={this.props.parameters} />
+                            <AdsrPatch oscillator={this.props.oscillator} envelope={this.props.envelope} />
                         </div>
                     </div>
 
@@ -47,7 +66,7 @@ class InstrumentBuilderPage extends React.Component {
                         <div className="col-sm-6">
                         </div>
                         <div className="col-sm-6">
-                            <AdsrPlayer parameters={this.props.parameters} />
+                            <AdsrPlayer oscillator={this.props.oscillator} envelope={this.props.envelope} />
                         </div>
                     </div>
 
@@ -58,19 +77,23 @@ class InstrumentBuilderPage extends React.Component {
 }
 
 InstrumentBuilderPage.propTypes = {
-    parameters: PropTypes.object,
-    parametersActions: PropTypes.object
+    oscillator: PropTypes.object,
+    oscillatorActions: PropTypes.object, 
+    envelope: PropTypes.object,
+    envelopeActions: PropTypes.object
 };
 
 function mapStateToProps(state) {
     return {
-        parameters: state.parameters
+        oscillator: state.oscillator,
+        envelope: state.envelope
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-       parametersActions: bindActionCreators(parametersActions, dispatch)
+       oscillatorActions: bindActionCreators(oscillatorActions, dispatch),
+       envelopeActions: bindActionCreators(envelopeActions, dispatch)
     };
 }
 
