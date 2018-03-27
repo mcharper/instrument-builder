@@ -1,10 +1,10 @@
 export default {
     oscillator: {
-        type: 'sine',
+        type: 'square',
         frequency: 440 ,
-        detune: 0 ,
+        detune: 0,
         phase: 0 ,
-        partials: []
+        partials: [ 1 ]
     },
     envelope: 
     { 

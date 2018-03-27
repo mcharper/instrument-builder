@@ -12,7 +12,7 @@ import AdsrControl from '../components/AdsrControl.js';
 import AdsrEnvelope from '../components/AdsrEnvelope.js';
 
 import AdsrPatch from '../components/AdsrPatch.js';
-import AdsrPlayer from '../components/Player.js';
+import Player from '../components/Player.js';
 
 class InstrumentBuilderPage extends React.Component {
     tweakOscillator= (oscillator) => {
@@ -38,6 +38,14 @@ class InstrumentBuilderPage extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-6">
+                        </div>
+                        <div className="col-sm-6">
+                            <Player oscillator={this.props.oscillator} envelope={this.props.envelope} />
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-sm-6">
                             <OscillatorControl oscillator={this.props.oscillator} onChange={this.tweakOscillator} />
                         </div>
                         <div className="col-sm-6">
@@ -59,14 +67,6 @@ class InstrumentBuilderPage extends React.Component {
                         </div>
                         <div className="col-sm-6">
                             <AdsrPatch oscillator={this.props.oscillator} envelope={this.props.envelope} />
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-sm-6">
-                        </div>
-                        <div className="col-sm-6">
-                            <AdsrPlayer oscillator={this.props.oscillator} envelope={this.props.envelope} />
                         </div>
                     </div>
 
