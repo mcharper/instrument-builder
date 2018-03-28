@@ -12,8 +12,8 @@ class AdsrEnvelope extends Component {
   redraw(envelope) {
     this.data = [{x: 0, y: 0}];
     this.data.push({ x: +this.props.envelope.attack, y: 1 })
-    this.data.push({ x: +this.props.envelope.attack + +this.props.envelope.decay, y: this.props.envelope.sustain })
-    this.data.push({ x: +this.props.envelope.attack + +this.props.envelope.decay + +1, y: this.props.envelope.sustain })
+    this.data.push({ x: +this.props.envelope.attack + +this.props.envelope.decay, y: +this.props.envelope.sustain })
+    this.data.push({ x: +this.props.envelope.attack + +this.props.envelope.decay + +1, y: +this.props.envelope.sustain })
     this.data.push({ x: +this.props.envelope.attack + +this.props.envelope.decay + +1 + +this.props.envelope.release, y: 0 })
   };
 
@@ -36,6 +36,7 @@ class AdsrEnvelope extends Component {
           Adsr Envelope
   
           <LineChart
+            labelsCountY='1.5'
             data={this.data.map((point, i) => ({...point, active: point.x === activePoint.x ? true : false}))}
             pointsOnHover={this.handlePointHover}
           />
