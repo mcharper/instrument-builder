@@ -9,6 +9,9 @@ import React from 'react';
 import OscillatorControl from '../components/OscillatorControl.js';
 import OscillatorDisplay from '../components/OscillatorDisplay.js';
 
+import SynthControl from '../components/SynthControl.js';
+import SynthDisplay from '../components/SynthDisplay.js';
+
 import AdsrControl from '../components/AdsrControl.js';
 import AdsrEnvelope from '../components/AdsrEnvelope.js';
 import AdsrPatch from '../components/AdsrPatch.js';
@@ -62,6 +65,15 @@ class InstrumentBuilderPage extends React.Component {
                         </div>
                         <div className="col-sm-6">
                             <Player oscillator={this.props.oscillator} envelope={this.props.envelope} player={this.props.player} />
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-sm-6">
+                            <SynthControl />
+                        </div>
+                        <div className="col-sm-6">
+                            <SynthDisplay />
                         </div>
                     </div>
 

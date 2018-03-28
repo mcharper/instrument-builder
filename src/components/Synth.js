@@ -29,12 +29,13 @@ export const play = (oscillator, envelope) => {
 };
 
 export const tweak = (oscillator, envelope) => {
-    synth.oscillator.type = oscillator.type;
-
-    synth.envelope.attack = envelope.attack;
-    synth.envelope.decay = envelope.decay;
-    synth.envelope.sustain = envelope.sustain;
-    synth.envelope.release = envelope.release;
+    if(synth) {
+        synth.oscillator.type = oscillator.type;
+        synth.envelope.attack = envelope.attack;
+        synth.envelope.decay = envelope.decay;
+        synth.envelope.sustain = envelope.sustain;
+        synth.envelope.release = envelope.release;
+    }
 };
 
 export const stop = () => {
