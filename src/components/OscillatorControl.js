@@ -17,7 +17,7 @@ class OscillatorControl extends Component {
 
   render() {
     const waveForms = [
-      'sine', 'square', 'sawtooth'
+      'sine', 'triangle', 'square'
     ];
     const defaultOption = this.props.oscillator.type;
   

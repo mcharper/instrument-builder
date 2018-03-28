@@ -10,6 +10,12 @@ class OscillatorDisplay extends Component {
   }
 
   render() {
+    var imageSources = new Map([
+      ['sine', sineWave],
+      ['triangle', triangleWave],
+      ['square', squareWave]
+    ]);
+
     return (
       <div className="OscillatorDisplay panel">
         <div className="row">
@@ -19,9 +25,7 @@ class OscillatorDisplay extends Component {
         </div>
         <div className="row">
           <div className="col-sm-12">
-            <img src={sineWave} alt="sineWave" className="oscillatorWave" />
-            <img src={triangleWave} alt="triangleWave" className="oscillatorWave" />
-            <img src={squareWave} alt="squareWave" className="oscillatorWave" />
+            <img src={imageSources.get(this.props.oscillator.type)} className="oscillatorWave" />
           </div>
         </div>
       </div>
