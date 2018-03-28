@@ -11,11 +11,16 @@ export const play = (oscillator, envelope) => {
         "envelope" : envelope
     }).toMaster();
 
-    // synth.triggerAttackRelease("D3", "2n");
-
     var pattern = new Tone.Pattern(function(time, note){
         synth.triggerAttackRelease(note, 0.25);
-    }, ["C4", "E4", "G4", "C5", "G4", "E4", "C4" ]);
+    }, ["C4", "E4", "G4", "C5", "G4", "E4",
+        "C4", "E4", "G4", "C5", "G4", "E4",
+        "C4", "F4", "G4", "A4", "G4", "F4",
+        "C4", "F4", "G4", "A4", "G4", "F4",
+        "C4", "E4", "G4", "C5", "G4", "E4",
+        "C4", "E4", "G4", "C5", "G4", "E4",
+        "C4", "E4", "F4", "G4", "A4", "E4",
+        "C4", "E4", "F4", "G4", "A4", "E4" ]);
 
     pattern.start(0);
 
@@ -24,8 +29,12 @@ export const play = (oscillator, envelope) => {
 };
 
 export const tweak = (oscillator, envelope) => {
-    // synth.oscillator = oscillator;
+    synth.oscillator.type = oscillator.type;
+
     synth.envelope.attack = envelope.attack;
+    synth.envelope.decay = envelope.decay;
+    synth.envelope.sustain = envelope.sustain;
+    synth.envelope.release = envelope.release;
 };
 
 export const stop = () => {

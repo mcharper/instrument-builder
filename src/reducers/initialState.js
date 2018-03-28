@@ -1,4 +1,8 @@
 export default {
+    player: {
+        playing: false,
+        volume: 0
+    },
     oscillator: {
         type: 'square',
         frequency: 440 ,

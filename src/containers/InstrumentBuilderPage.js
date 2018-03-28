@@ -1,7 +1,8 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as envelopeActions from '../actions/envelopeActions';
 import * as oscillatorActions from '../actions/oscillatorActions';
+import * as envelopeActions from '../actions/envelopeActions';
+import * as playerActions from '../actions/playerActions';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -10,17 +11,36 @@ import OscillatorDisplay from '../components/OscillatorDisplay.js';
 
 import AdsrControl from '../components/AdsrControl.js';
 import AdsrEnvelope from '../components/AdsrEnvelope.js';
-
 import AdsrPatch from '../components/AdsrPatch.js';
+
+import PlayerControl from '../components/PlayerControl.js';
 import Player from '../components/Player.js';
+
+import * as synth from "../components/Synth.js";
 
 class InstrumentBuilderPage extends React.Component {
     tweakOscillator= (oscillator) => {
         this.props.oscillatorActions.tweakOscillator({type: oscillator.type});
+        synth.tweak(this.props.oscillator, this.props.envelope);
     }
 
     tweakEnvelope = (envelope) => {
         this.props.envelopeActions.tweakEnvelope({attack: envelope.attack, decay: envelope.decay, sustain: envelope.sustain, release: envelope.release});
+        synth.tweak(this.props.oscillator, this.props.envelope);
+    }
+
+    onPlay = () => {
+        this.props.playerActions.adjustPlayback({playing: true});
+        synth.play(this.props.oscillator, this.props.envelope);
+    }
+
+    onStop = () => {
+        this.props.playerActions.adjustPlayback({playing: false});
+        synth.stop();
+    }
+
+    adjustPlayback = (player) => {
+        this.props.playerActions.adjustPlayback({playing: player.playing});
     }
 
     componentWillMount() {
@@ -38,9 +58,10 @@ class InstrumentBuilderPage extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-6">
+                            <PlayerControl oscillator={this.props.oscillator} envelope={this.props.envelope} onPlay={this.onPlay}  onStop={this.onStop} onChange={this.adjustPlayback} />
                         </div>
                         <div className="col-sm-6">
-                            <Player oscillator={this.props.oscillator} envelope={this.props.envelope} />
+                            <Player oscillator={this.props.oscillator} envelope={this.props.envelope} player={this.props.player} />
                         </div>
                     </div>
 
@@ -80,20 +101,24 @@ InstrumentBuilderPage.propTypes = {
     oscillator: PropTypes.object,
     oscillatorActions: PropTypes.object, 
     envelope: PropTypes.object,
-    envelopeActions: PropTypes.object
+    envelopeActions: PropTypes.object,
+    player: PropTypes.object,
+    playerActions: PropTypes.object,
 };
 
 function mapStateToProps(state) {
     return {
         oscillator: state.oscillator,
-        envelope: state.envelope
+        envelope: state.envelope,
+        player: state.player
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
        oscillatorActions: bindActionCreators(oscillatorActions, dispatch),
-       envelopeActions: bindActionCreators(envelopeActions, dispatch)
+       envelopeActions: bindActionCreators(envelopeActions, dispatch),
+       playerActions: bindActionCreators(playerActions, dispatch)
     };
 }
 

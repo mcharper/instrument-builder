@@ -1,10 +1,12 @@
 import {combineReducers} from 'redux';
-import envelope from './envelopeReducer';
 import oscillator from './oscillatorReducer';
+import envelope from './envelopeReducer';
+import player from './playerReducer';
 
 const rootReducer = combineReducers({
+  oscillator,
   envelope,
-  oscillator
+  player
 });
 
 export default rootReducer;
