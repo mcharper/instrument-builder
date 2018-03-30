@@ -3,8 +3,9 @@ export default {
         playing: false,
         volume: 0
     },
+    synthType: 'synth',
     oscillator: {
-        type: 'square',
+        type: 'sine',
         frequency: 440 ,
         detune: 0,
         phase: 0 ,

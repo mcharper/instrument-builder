@@ -6,18 +6,17 @@ import 'react-dropdown/style.css'
 class SynthControl extends Component {
   constructor(props) {
     super(props);
-    this._onSelect = (option) => {
-        var synth = { type: option.value };
-        // this.props.onChange(synth);
+    this.changeSynth = (option) => {
+        var synthType = { type: option.value };
+        this.props.onChange(synthType);
     };
   }
 
   render() {
     const synthTypes = [
-      'synth', 'membrane'
+      'synth', 'membrane', 'pluck'
     ];
-//    const defaultOption = this.props.synth.type;
-    const defaultOption = 'synth';
+    const defaultOption = this.props.synthType.type;
   
     return (
       <form className="SynthControl panel">
@@ -29,7 +28,7 @@ class SynthControl extends Component {
 
         <div className="row">
           <div className="col-sm-12">
-            <Dropdown options={synthTypes} onChange={this._onSelect} value={defaultOption} placeholder="Select" />
+            <Dropdown options={synthTypes} onChange={this.changeSynth} value={defaultOption} placeholder="Select" />
           </div>
         </div>
       </form>

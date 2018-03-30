@@ -19,7 +19,7 @@ class SynthDisplay extends Component {
         </div>
         <div className="row">
           <div className="col-sm-12">
-            Only standard synth available at the moment
+            {this.props.synthType.type}
           </div>
         </div>
       </div>

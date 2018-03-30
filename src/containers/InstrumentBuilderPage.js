@@ -1,5 +1,6 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import * as synthTypeActions from '../actions/synthTypeActions';
 import * as oscillatorActions from '../actions/oscillatorActions';
 import * as envelopeActions from '../actions/envelopeActions';
 import * as playerActions from '../actions/playerActions';
@@ -22,6 +23,14 @@ import Player from '../components/Player.js';
 import * as synth from "../components/Synth.js";
 
 class InstrumentBuilderPage extends React.Component {
+    changeSynth = (synthType) => {
+        this.props.synthTypeActions.changeSynthType({type: synthType.type})
+        if(this.props.player.playing) {
+            synth.stop();
+        }
+        synth.play(synthType.type, this.props.oscillator, this.props.envelope);
+    }
+
     tweakOscillator= (oscillator) => {
         this.props.oscillatorActions.tweakOscillator({type: oscillator.type});
         synth.tweak(this.props.oscillator, this.props.envelope);
@@ -34,7 +43,7 @@ class InstrumentBuilderPage extends React.Component {
 
     onPlay = () => {
         this.props.playerActions.adjustPlayback({playing: true});
-        synth.play(this.props.oscillator, this.props.envelope);
+        synth.play(this.props.synthType.type, this.props.oscillator, this.props.envelope);
     }
 
     onStop = () => {
@@ -70,10 +79,10 @@ class InstrumentBuilderPage extends React.Component {
 
                     <div className="row">
                         <div className="col-sm-6">
-                            <SynthControl />
+                            <SynthControl synthType={this.props.synthType} onChange={this.changeSynth} />
                         </div>
                         <div className="col-sm-6">
-                            <SynthDisplay />
+                            <SynthDisplay synthType={this.props.synthType} />
                         </div>
                     </div>
 
@@ -110,6 +119,7 @@ class InstrumentBuilderPage extends React.Component {
 }
 
 InstrumentBuilderPage.propTypes = {
+    synthType: PropTypes.object,
     oscillator: PropTypes.object,
     oscillatorActions: PropTypes.object, 
     envelope: PropTypes.object,
@@ -120,6 +130,7 @@ InstrumentBuilderPage.propTypes = {
 
 function mapStateToProps(state) {
     return {
+        synthType: state.synthType,
         oscillator: state.oscillator,
         envelope: state.envelope,
         player: state.player
@@ -128,6 +139,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+       synthTypeActions: bindActionCreators(synthTypeActions, dispatch),
        oscillatorActions: bindActionCreators(oscillatorActions, dispatch),
        envelopeActions: bindActionCreators(envelopeActions, dispatch),
        playerActions: bindActionCreators(playerActions, dispatch)
