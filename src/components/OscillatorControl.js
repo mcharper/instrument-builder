@@ -25,7 +25,7 @@ class OscillatorControl extends Component {
       <form className="OscillatorControl panel">
         <div className="row">
           <div className="col-sm-12">
-            OscillatorControl
+            <h3>Oscillator Type</h3>
           </div>
         </div>
 

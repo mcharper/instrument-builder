@@ -28,7 +28,7 @@ class InstrumentBuilderPage extends React.Component {
         if(this.props.player.playing) {
             synth.stop();
         }
-        synth.play(synthType.type, this.props.oscillator, this.props.envelope);
+        synth.play(this.props.player, { type: synthType }, this.props.oscillator, this.props.envelope);
     }
 
     tweakOscillator= (oscillator) => {
@@ -43,7 +43,7 @@ class InstrumentBuilderPage extends React.Component {
 
     onPlay = () => {
         this.props.playerActions.adjustPlayback({playing: true});
-        synth.play(this.props.synthType.type, this.props.oscillator, this.props.envelope);
+        synth.play(this.props.player, this.props.synthType, this.props.oscillator, this.props.envelope);
     }
 
     onStop = () => {
@@ -52,7 +52,8 @@ class InstrumentBuilderPage extends React.Component {
     }
 
     adjustPlayback = (player) => {
-        this.props.playerActions.adjustPlayback({playing: player.playing});
+        console.log(JSON.stringify(player));
+        this.props.playerActions.adjustPlayback({playing: player.playing, volume: player.volume, bpm: player.bpm});
     }
 
     componentWillMount() {
@@ -70,7 +71,7 @@ class InstrumentBuilderPage extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-6">
-                            <PlayerControl oscillator={this.props.oscillator} envelope={this.props.envelope} onPlay={this.onPlay}  onStop={this.onStop} onChange={this.adjustPlayback} />
+                            <PlayerControl player={this.props.player} oscillator={this.props.oscillator} envelope={this.props.envelope} onPlay={this.onPlay}  onStop={this.onStop} onChange={this.adjustPlayback} />
                         </div>
                         <div className="col-sm-6">
                             <Player oscillator={this.props.oscillator} envelope={this.props.envelope} player={this.props.player} />

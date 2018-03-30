@@ -8,6 +8,7 @@ export default function envelope(state = initialState.envelope, action) {
     case TWEAK_ENVELOPE:
       newState =  { 
          attack: action.envelope.attack || state.attack,
+         release: action.envelope.attackNoise || state.attackNoise,
          decay: action.envelope.decay || state.decay,
          sustain: action.envelope.sustain || state.sustain,
          release: action.envelope.release || state.release

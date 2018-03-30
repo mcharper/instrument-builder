@@ -3,15 +3,15 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
+/*  animation: App-logo-spin infinite 20s linear; */
   height: 80px;
 }
 
 .App-header {
-  background-color: #222;
+  background-color: #ddd;
   height: 150px;
   padding: 20px;
-  color: white;
+  color: black;
 }
 
 .App-title {
@@ -19,6 +19,7 @@
 }
 
 .App-intro {
+  padding-top: 10px;
   font-size: large;
 }
 
@@ -38,7 +39,7 @@
 }
 
 .panel {
-  background-color: #eee;
+    background-color: #eee;
     border: 1px solid silver;
     margin: 10px;
     padding: 10px;
@@ -47,4 +48,8 @@
 .oscillatorWave {
   max-height: 100px;
   width: 90%;
+}
+
+.synthType {
+  height: 100px;
 }

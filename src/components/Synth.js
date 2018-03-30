@@ -2,17 +2,17 @@ import Tone from "tone";
 
 var synth;
 
-export const play = (synthType, oscillator, envelope) => {
+export const play = (player, synthType, oscillator, envelope) => {
     Tone.context.close();
     Tone.context = new AudioContext();
 
-    if(synthType == 'synth') {
+    if(synthType.type == 'synth') {
         synth = new Tone.Synth({
             "oscillator" : oscillator,
             "envelope" : envelope
         }).toMaster();
     }
-    else if(synthType == 'pluck') {
+    else if(synthType.type == 'pluck') {
         synth = new Tone.PluckSynth({
             "oscillator" : oscillator,
             "envelope" : envelope
@@ -25,9 +25,13 @@ export const play = (synthType, oscillator, envelope) => {
         }).toMaster();
     }
 
+    var freeverb = new Tone.Freeverb().toMaster();
+//    freeverb.roomSize.value = player.reverb;
+    var reverbed = synth.connect(freeverb);
+
     var pattern = new Tone.Pattern(function(time, note){
-        synth.triggerAttackRelease(note, 0.25);
-    }, ["C2", "E2", "G2", "C2", "G2", "E2",
+        reverbed.triggerAttackRelease(note, 0.25);
+    }, ["C1", "E1", "G1", "C1", "G1", "E1",
         "C4", "E4", "G4", "C5", "G4", "E4",
         "C4", "F4", "G4", "A4", "G4", "F4",
         "C4", "F4", "G4", "A4", "G4", "F4",
@@ -38,7 +42,9 @@ export const play = (synthType, oscillator, envelope) => {
 
     pattern.start(0);
 
-    Tone.Master.volume.value = 0;
+    console.log(JSON.stringify(player))
+    Tone.Master.volume.value = player.volume;
+    Tone.Transport.bpm.value = player.bpm;
     Tone.Transport.start(1);
 };
 

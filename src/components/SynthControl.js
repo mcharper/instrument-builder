@@ -22,7 +22,7 @@ class SynthControl extends Component {
       <form className="SynthControl panel">
         <div className="row">
           <div className="col-sm-12">
-            SynthControl
+            <h3>Synth Type</h3>
           </div>
         </div>
 

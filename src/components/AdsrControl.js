@@ -23,6 +23,13 @@ class AdsrControl extends Component {
                     />
             </div>
             <div className="form-group row">
+                  <label htmlFor="attackNoise" className="col-md-6  col-form-label">Attack Noise</label>
+                  <input type="range" className="col-md-6 slider" name="attackNoise" id="attackNoiseSlider" min="0" max="20" step="0.1" 
+                    value={this.props.envelope.attackNoise}
+                    onChange={this.onChange}
+                  />
+            </div>
+            <div className="form-group row">
                   <label htmlFor="decay" className="col-md-6  col-form-label">Decay</label>
                   <input type="range" className="col-md-6 slider" name="decay" id="decaySlider" min="0" max="5" step="0.01" 
                     value={this.props.envelope.decay}
